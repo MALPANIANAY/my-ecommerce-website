@@ -1,0 +1,72 @@
+2016-11-01 13:31:22 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 34
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 41
+LINE: 92
+LINE: 104
+LINE: 142
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 23
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 35
+LINE: 41
+LINE: 47
+FILE: system/library/template/basic.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+----------------------------------------------------------------
+MOD: <font color="#0000"><b>Welcome Client Account</font>
+FILE: catalog/language/en-gb/account/account.php
+CODE: <?php
+LINE: 3
+FILE: catalog/controller/account/account.php
+CODE: $data['newsletter'] = $this->url->link('account/newsletter', '', true);
+LINE: 89
+FILE: catalog/view/theme/default/template/account/account.tpl
+CODE: <h2><?php echo $text_my_account; ?></h2>
+LINE: 22
+----------------------------------------------------------------
+MOD: Current Password Confirmation
+FILE: catalog/view/theme/default/template/account/password.tpl
+CODE: <legend><?php echo $text_password; ?></legend>
+LINE: 34
+FILE: catalog/controller/account/password.php
+CODE: $data['button_back'] = $this->language->get('button_back');
+LINE: 78
+CODE: validate() {
+LINE: 131
+FILE: catalog/language/en-gb/account/password.php
+CODE: // Entry
+LINE: 17
+FILE: catalog/model/account/customer.php
+CODE: public function getTotalCustomersByEmail($email) {
+LINE: 151
+----------------------------------------------------------------
+MOD: Custom CSS Javascript Code
+FILE: catalog/controller/common/header.php
+CODE: $data['title'] = $this->document->getTitle();
+LINE: 29
+FILE: catalog/view/theme/default/template/common/header.tpl
+CODE: </head>
+LINE: 41
+----------------------------------------------------------------
+MOD: page speed
+FILE: system/library/response.php
+CODE: $output = $this->compress($this->output, $this->level);
+LINE: 60
+CODE: $output = $this->output;
+LINE: 64
+CODE: echo $output;
+LINE: 172
+----------------------------------------------------------------
+MOD: Super Custom Theme
+CODE: $data['title'] = $this->document->getTitle();
+LINE: 29
+CODE: </head>
+LINE: 44
+----------------------------------------------------------------

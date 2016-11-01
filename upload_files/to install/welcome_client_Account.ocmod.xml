@@ -1,0 +1,51 @@
+<modification>
+   <name><![CDATA[<font color="#0000"><b>Welcome Client Account</font>]]></name>
+   <code>PlatformX welcome </code>
+    <version><![CDATA[<b>1.0</b>]]></version>
+    <author><![CDATA[PlatformX]]></author>
+    <link><![CDATA[http://www.platformx.tech]]></link>
+ <!-- Config Language -->
+ <file path="catalog/language/en-gb/account/account.php">
+    <operation>
+			<search><![CDATA[
+            <?php
+			]]></search>
+			<add position="after"><![CDATA[
+            $_['text_lrppo']  = 'Hi <strong>%s</strong>, welcome!';
+      ]]></add>
+	</operation>
+</file>
+ <file path="catalog/language/pt-br/account/account.php">
+    <operation>
+			<search><![CDATA[
+            <?php
+			]]></search>
+			<add  position="after"><![CDATA[
+            $_['text_lrppo']  = 'Olá <strong>%s</strong>, bem-vindo(a) à nossa loja!';
+            ]]></add>
+	</operation>
+</file>
+ <!-- End Language -->   
+<file path="catalog/controller/account/account.php">
+    <operation>
+			<search><![CDATA[
+			$data['newsletter'] = $this->url->link('account/newsletter', '', true);
+			]]></search>
+			<add position="after"><![CDATA[
+		    $this->load->model('account/customer');
+		    $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+		    $data['text_lrppo'] = sprintf($this->language->get('text_lrppo'), $customer_info['firstname']);
+      ]]></add>
+	</operation>
+</file>			
+<file path="catalog/view/theme/*/template/account/account.tpl">
+    <operation>
+			<search><![CDATA[
+			<h2><?php echo $text_my_account; ?></h2>
+			]]></search>
+			<add position="before"><![CDATA[
+            <br /><h2><?php echo $text_lrppo; ?></h2><br />	
+           ]]></add>
+	</operation>
+</file>	
+</modification>

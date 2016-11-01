@@ -1,0 +1,122 @@
+<modification>
+	<name>page speed</name>
+	<version>2.1.0.2</version>
+	<link>http://platformx.tech</link>
+	<author>platformx</author>
+	<code>PLatform Speed</code>
+  	<file path="system/library/response.php">        
+	  <operation error="skip">
+	      <search><![CDATA[$output = $this->compress($this->output, $this->level);]]></search>
+	      <add position="replace"><![CDATA[ 
+	        $output = $this->compress(minify($this->output,1), $this->level);
+	      ]]></add>
+	  </operation> 
+	  <operation error="skip">
+	      <search><![CDATA[$output = $this->output;]]></search>
+	      <add position="replace"><![CDATA[ 
+	        $output = minify($this->output,1);
+	      ]]></add>
+	  </operation> 
+	  <operation error="skip">
+	  
+	  <search><![CDATA[echo $output;]]></search>
+	  <add position="after" offset="3"><![CDATA[
+
+define('SAFE', 1);
+define('EXTREME', 2);
+define('EXTREME_SAVE_COMMENTS', 4);
+define('EXTREME_SAVE_PRE', 3);
+
+function minify($html, $level=2)
+{
+	switch((int)$level)
+	{
+		case 0:
+			
+		break;
+		
+		case 1: 
+		
+			
+			$html = preg_replace("`>\s+<`", "> <", $html);
+		break;
+		
+		case 2: 
+			
+			
+			$place_holders = array(
+				'<!-->' => '_!--_',
+			);
+			
+			
+			$html = strtr($html, $place_holders);
+			
+			
+			$html = preg_replace('/<!--[^(\[|(<!))](.*)-->/Uis', '', $html);
+			
+			
+			$html = preg_replace("`\s+`", " ", $html);
+			
+			
+			$html = preg_replace("`> <`", "><", $html);
+			
+			
+			$html = str_replace("</a><a", "</a> <a", $html);
+			
+			$html = strtr($html, array_flip($place_holders));
+		break;
+		
+		case 3: 
+			$place_holders = array(
+				'<!-->' => '_!--_',
+				'<pre>' => '_pre_',
+				'</pre>' => '_/pre_',
+				'<code>' => '_code_',
+				'</code>' => '_/code_'
+			);
+			
+			$html = strtr($html, $place_holders);
+			
+			$html = preg_replace('/<!--[^(\[|(<!))](.*)-->/Uis', '', $html);
+			
+			
+			$html = preg_replace(">`\s+`<", "> <", $html);
+			
+			
+			$html = preg_replace("`> <`", "><", $html);
+			
+			
+			$html = str_replace("</a><a", "</a> <a", $html);
+			
+			$html = strtr($html, array_flip($place_holders));
+		
+		break;
+		
+		case 4: 
+			
+			
+			$html = preg_replace("`\s+`", " ", $html);
+			
+			
+			$html = preg_replace("`> <`", "><", $html);
+			
+			
+			$html = str_replace("</a><a", "</a> <a", $html);
+		break;
+	}
+
+	
+	$replace = array(
+		'&nbsp;' => '&#160;',
+		'&copy;' => '&#169;',
+		'&acirc;' => '&#226;',
+		'&cent;' => '&#162;',
+		'&raquo;' => '&#187;',
+		'&laquo;' => '&#171;'
+	);
+	
+	return $html;
+}		]]></add>
+	  </operation> 
+	</file>
+</modification>
